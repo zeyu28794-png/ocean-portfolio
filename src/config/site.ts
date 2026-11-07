@@ -62,7 +62,7 @@ export const site = {
     { name: '骑行 · Cycling', detail: '热爱公路骑行，享受在路上的自由与沿途风景。' },
     { name: '潜水 · Diving', detail: '喜欢潜水，探索水面之下的静谧世界。' },
     { name: '钓鱼 · Fishing', detail: '喜欢钓鱼，在等待与专注中收获一份平静。' },
-    { name: '学业成绩 · Academic', detail: '学业成绩优异，保持对知识的好奇与持续投入。' },
+    { name: '学业成绩 · Academic', detail: '学年专业排名前 15%，GPA 3.799。' },
   ],
 
   projectsTitle: ['探索我的', '作品'],
