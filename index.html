@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a1f2a" />
+    <meta
+      name="description"
+      content="OCEAN. — A World Beyond The Waves. 在代码与创意的海洋里，探索无限可能。"
+    />
+    <title>OCEAN. — A World Beyond The Waves</title>
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a1f2a'/%3E%3Cpath d='M4 19c3-4 6-4 9 0s6 4 9 0 4-3 6-1' stroke='%23e0a071' stroke-width='2.2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='23' cy='9' r='3.2' fill='%23f0d8bc'/%3E%3C/svg%3E"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=DM+Mono:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- First-paint sea gradient: avoids a white flash before the WebGL scene boots. -->
+    <style>
+      html,
+      body {
+        background: #0a1f2a;
+      }
+      #root {
+        min-height: 100svh;
+      }
+      #boot {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        background:
+          radial-gradient(120% 70% at 62% 12%, #f3dcbe 0%, rgba(243, 220, 190, 0) 46%),
+          linear-gradient(180deg, #2b556e 0%, #6d94a0 26%, #cfd8cc 42%, #1a586a 62%, #07222f 100%);
+        transition: opacity 900ms ease 120ms;
+      }
+      #boot.gone {
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="boot" aria-hidden="true"></div>
+    <div id="root"></div>
+    <noscript>
+      <div style="padding:48px;color:#eef4f3;font-family:system-ui">
+        OCEAN. — 本站需要启用 JavaScript 才能体验 3D 海洋场景。
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
