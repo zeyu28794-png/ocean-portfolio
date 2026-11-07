@@ -47,6 +47,7 @@ export function About() {
 
             <Reveal delay={300}>
               <div className="cap-list">
+                <div className="kicker">{site.capabilitiesTitle}</div>
                 {site.capabilities.map((c, i) => (
                   <div className="cap-row" key={c.name}>
                     <em>{String(i + 1).padStart(2, '0')}</em>

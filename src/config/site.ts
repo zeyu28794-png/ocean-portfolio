@@ -57,11 +57,12 @@ export const site = {
     note: 'OPEN TO COLLABORATION',
   },
 
+  capabilitiesTitle: 'Academic Highlights',
   capabilities: [
-    { name: '前端开发', detail: 'React / TypeScript / Vite / Tailwind' },
-    { name: '全栈与后端', detail: 'Supabase / PostgreSQL / Auth / RLS' },
-    { name: '界面与交互', detail: '响应式 / 组件化 / 动效' },
-    { name: '工程化与部署', detail: 'Git / Vite 构建 / Pages·Netlify·Vercel' },
+    { name: '骑行 · Cycling', detail: '热爱公路骑行，享受在路上的自由与沿途风景。' },
+    { name: '潜水 · Diving', detail: '喜欢潜水，探索水面之下的静谧世界。' },
+    { name: '钓鱼 · Fishing', detail: '喜欢钓鱼，在等待与专注中收获一份平静。' },
+    { name: '学业成绩 · Academic', detail: '学业成绩优异，保持对知识的好奇与持续投入。' },
   ],
 
   projectsTitle: ['探索我的', '作品'],

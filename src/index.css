@@ -659,6 +659,10 @@ h3 {
   border-top: 1px solid rgba(238, 244, 242, 0.12);
 }
 
+.cap-list .kicker {
+  padding: 16px 0 6px;
+}
+
 .cap-row {
   display: grid;
   grid-template-columns: 34px 1fr auto;
@@ -1228,7 +1232,39 @@ h3 {
     padding: 14vh var(--pad-x) 12vh;
   }
   .project-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .project-meta {
+    padding: 10px 0 0;
+    gap: 10px;
+  }
+  .project-meta small {
+    font-size: 7px;
+    letter-spacing: 0.14em;
+    margin-bottom: 5px;
+  }
+  .project-meta h3 {
+    font-size: 15px;
+    line-height: 1.25;
+  }
+  .project-meta h3 span {
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    margin-top: 4px;
+  }
+  .tech-row {
+    gap: 4px;
+    margin-top: 8px;
+  }
+  .tech-row span {
+    font-size: 7.5px;
+    padding: 3px 6px;
+  }
+  .project-arrow {
+    width: 26px;
+    height: 26px;
+    font-size: 9px;
   }
   .section-head {
     display: block;
