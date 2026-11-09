@@ -19,7 +19,7 @@ import { oceanState } from '../../lib/ocean'
  * are mutable every-frame state, not React state, and there is a single scene.
  */
 
-const MAX = 80
+const MAX = 120
 
 const vert = /* glsl */ `
   attribute float aSize;
@@ -98,6 +98,7 @@ export function CursorBubbles({ reduced }: { reduced: boolean }) {
   const mouse = useRef({ x: 0, y: 0, active: false })
   const time = useRef(0)
   const spawnIndex = useRef(0)
+  const spawnAcc = useRef(0)
   const target = useRef(new Vector3())
   const ndc = useRef(new Vector3())
   const dir = useRef(new Vector3())
@@ -147,8 +148,9 @@ export function CursorBubbles({ reduced }: { reduced: boolean }) {
     }
 
     if (canSpawn) {
-      const count = 1
-      for (let k = 0; k < count; k++) {
+      spawnAcc.current += 1.5
+      while (spawnAcc.current >= 1) {
+        spawnAcc.current -= 1
         const i = spawnIndex.current
         spawnIndex.current = (spawnIndex.current + 1) % MAX
         const r = Math.random
