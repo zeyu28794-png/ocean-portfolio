@@ -44,7 +44,7 @@ const vert = /* glsl */ `
   }
 
   void main() {
-    float t = uTime * 2.4;
+    float t = uTime * 3.2;
     vec3 p0 = orbit(t, aCenter, aPhase);
     vec3 p1 = orbit(t + 0.14, aCenter, aPhase);
 
@@ -144,7 +144,7 @@ function buildGeometry(count: number) {
     center[i * 3 + 1] = s.y + (rnd() - 0.5) * 3
     center[i * 3 + 2] = s.z + (rnd() - 0.5) * 9
     phase[i] = rnd() * 6.2831
-    scale[i] = 0.34 + rnd() * 0.36
+    scale[i] = 0.7 + rnd() * 0.5
     band[i] = s.y
   }
 
@@ -179,7 +179,7 @@ export function FishSchool({ quality }: { quality: QualitySettings }) {
     const m = mat.current
     if (!m) return
     m.uniforms.uCamY.value = camera.position.y
-    m.uniforms.uOpacity.value = oceanState.underwaterAmount
+    m.uniforms.uOpacity.value = Math.min(1, oceanState.underwaterAmount * 1.8)
   })
 
   return (
