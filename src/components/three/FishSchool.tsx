@@ -144,7 +144,7 @@ function buildGeometry(count: number) {
     center[i * 3 + 1] = s.y + (rnd() - 0.5) * 3
     center[i * 3 + 2] = s.z + (rnd() - 0.5) * 9
     phase[i] = rnd() * 6.2831
-    scale[i] = 0.7 + rnd() * 0.5
+    scale[i] = 0.4 + rnd() * 0.5
     band[i] = s.y
   }
 
