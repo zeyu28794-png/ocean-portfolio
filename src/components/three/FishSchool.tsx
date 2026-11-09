@@ -124,7 +124,7 @@ function buildInstanceAttributes(count: number) {
     center[i * 3 + 1] = s.y + (rnd() - 0.5) * 3
     center[i * 3 + 2] = s.z + (rnd() - 0.5) * 9
     phase[i] = rnd() * 6.2831
-    scale[i] = 0.4 + rnd() * 0.5
+    scale[i] = 0.8 + rnd() * 1.0
     band[i] = s.y
   }
 
