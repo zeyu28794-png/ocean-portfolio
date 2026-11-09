@@ -83,7 +83,6 @@ export default function App() {
 
       <footer className="footer">
         <span>{site.footer.left}</span>
-        <span>{site.footer.middle}</span>
         <a
           href="#home"
           onClick={(e) => {

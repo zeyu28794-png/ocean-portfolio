@@ -108,7 +108,7 @@ export function Hero() {
               <i aria-hidden="true">↓</i>
             </button>
             <a
-              className="btn btn-ghost"
+              className="btn"
               href="#projects"
               onClick={(e) => {
                 e.preventDefault()

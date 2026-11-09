@@ -271,6 +271,48 @@ h3 {
   font-variant-numeric: tabular-nums;
 }
 
+/* 顶部导航字体改为黑色（水面亮背景上更清晰）；滚动后背景变深，切回浅色 */
+.brand {
+  color: #081018;
+}
+
+.brand small {
+  color: rgba(8, 16, 24, 0.55);
+}
+
+.nav-link {
+  color: #081018;
+}
+
+.nav-link:hover,
+.nav-link.is-active {
+  color: #000;
+}
+
+.nav-depth {
+  color: rgba(8, 16, 24, 0.55);
+}
+
+.nav-depth b {
+  color: #081018;
+}
+
+.nav-shell.is-scrolled .brand,
+.nav-shell.is-scrolled .nav-link,
+.nav-shell.is-scrolled .nav-depth b {
+  color: var(--foam);
+}
+
+.nav-shell.is-scrolled .brand small,
+.nav-shell.is-scrolled .nav-depth {
+  color: var(--mist-dim);
+}
+
+.nav-shell.is-scrolled .nav-link:hover,
+.nav-shell.is-scrolled .nav-link.is-active {
+  color: var(--foam);
+}
+
 .nav-burger {
   display: none;
   width: 42px;

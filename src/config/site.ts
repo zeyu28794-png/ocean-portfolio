@@ -219,16 +219,12 @@ export const site = {
     email: '384510@whut.edu.cn',
     links: [
       { label: 'GitHub', href: 'https://github.com/zeyu28794-png' },
-      { label: '个人名片', href: 'https://zeyu28794-png.github.io/Digital-Programming-and-Technology-Task/' },
-      { label: 'Netlify', href: 'https://firstpersonalwebsite1025.netlify.app/' },
-      { label: 'Vercel', href: 'https://digital-programming-and-technology-ten.vercel.app/' },
     ],
     closing: '愿你在自己的海域里，始终保有下潜的勇气。',
   },
 
   footer: {
     left: '© 2026 Zeyu Zhou · Personal Portfolio',
-    middle: 'Made with curiosity & code',
   },
 } as const
 
