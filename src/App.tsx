@@ -94,6 +94,10 @@ export default function App() {
           Back to surface ↑
         </a>
       </footer>
+
+      <a className="admin-link" href="admin.html" title="管理后台">
+        Admin
+      </a>
     </>
   )
 }

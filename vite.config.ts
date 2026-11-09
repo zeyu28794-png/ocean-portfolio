@@ -14,6 +14,10 @@ export default defineConfig({
     // isolated so it is never part of the first load, and each vendor chunk is
     // kept under the budget on its own.
     rolldownOptions: {
+      input: {
+        main: 'index.html',
+        admin: 'admin.html',
+      },
       output: {
         codeSplitting: {
           groups: [

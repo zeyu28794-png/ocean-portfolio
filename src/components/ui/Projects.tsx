@@ -1,8 +1,10 @@
 import { site } from '../../config/site'
 import { Reveal } from './Reveal'
+import { useProjects } from '../../hooks/useProjects'
 
 export function Projects() {
   const [l1, l2] = site.projectsTitle
+  const { projects } = useProjects()
 
   return (
     <section id="projects" data-section className="section veil">
@@ -18,7 +20,7 @@ export function Projects() {
         </div>
 
         <div className="project-grid">
-          {site.projects.map((p, i) => (
+          {projects.map((p, i) => (
             <Reveal key={p.id} delay={i * 90}>
               <a
                 className="project"
