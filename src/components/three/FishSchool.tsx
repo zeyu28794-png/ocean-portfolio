@@ -1,23 +1,23 @@
-import { useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 import {
-  BufferAttribute,
-  BufferGeometry,
   Color,
   InstancedBufferAttribute,
   InstancedMesh,
+  Mesh,
+  type BufferGeometry,
   type ShaderMaterial,
 } from 'three'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { ATMOS, TAIL, fogChunk, filmicChunk } from './shaders/common'
 import { oceanState } from '../../lib/ocean'
 import type { QualitySettings } from '../../lib/runtime'
 import { mulberry32 } from '../../lib/rand'
 
 /**
- * Fish schools. All motion happens in the vertex shader from a per-instance
- * phase, so 150 fish cost one draw call and zero per-frame CPU work.
- * Each school is a horizontal band; a band only becomes visible when the camera
- * is near its depth, which keeps the density believable instead of a swarm.
+ * Fish schools. The fish shape comes from a CC0 low-poly GLB model (Kenney),
+ * instanced so 150 fish still cost one draw call. All motion happens in the
+ * vertex shader from a per-instance phase.
  */
 
 const vert = /* glsl */ `
@@ -108,30 +108,10 @@ const SCHOOLS = [
   { y: -62, x: 2, z: -18 },
 ]
 
-function buildGeometry(count: number) {
-  // low-poly fish: tapered body + tail fin, +z is forward
-  const v = [
-    0, 0, 0.55,
-    0, 0.1, 0.08,
-    0.05, 0, 0.02,
-    0, -0.1, 0.08,
-    -0.05, 0, 0.02,
-    0, 0, -0.36,
-    0, 0.2, -0.62,
-    0, -0.2, -0.62,
-  ]
-  const idx = [
-    0, 1, 2, 0, 2, 3, 0, 3, 4, 0, 4, 1,
-    1, 5, 2, 2, 5, 3, 3, 5, 4, 4, 5, 1,
-    1, 6, 5, 2, 5, 7, 3, 7, 5, 4, 5, 6,
-    5, 6, 7,
-  ]
+/** Kenney 鱼模型长轴在 X、长约 0.205；原程序化鱼长约 1.17，放大 5.7 倍对齐。 */
+const GLB_SCALE = 5.7
 
-  const g = new BufferGeometry()
-  g.setAttribute('position', new BufferAttribute(new Float32Array(v), 3))
-  g.setIndex(idx)
-  g.computeVertexNormals()
-
+function buildInstanceAttributes(count: number) {
   const rnd = mulberry32(20260205)
   const center = new Float32Array(count * 3)
   const phase = new Float32Array(count)
@@ -148,18 +128,51 @@ function buildGeometry(count: number) {
     band[i] = s.y
   }
 
-  g.setAttribute('aCenter', new InstancedBufferAttribute(center, 3))
-  g.setAttribute('aPhase', new InstancedBufferAttribute(phase, 1))
-  g.setAttribute('aScale', new InstancedBufferAttribute(scale, 1))
-  g.setAttribute('aBand', new InstancedBufferAttribute(band, 1))
-  return g
+  return { center, phase, scale, band }
 }
 
 export function FishSchool({ quality }: { quality: QualitySettings }) {
   const mesh = useRef<InstancedMesh>(null)
   const mat = useRef<ShaderMaterial>(null)
   const count = quality.fish
-  const geometry = useMemo(() => buildGeometry(count), [count])
+  const [geometry, setGeometry] = useState<BufferGeometry | null>(null)
+
+  const instances = useMemo(() => buildInstanceAttributes(count), [count])
+
+  useEffect(() => {
+    let cancelled = false
+    const loader = new GLTFLoader()
+    loader.load(
+      'models/fish.glb',
+      (gltf) => {
+        if (cancelled) return
+        let fish: Mesh | null = null
+        gltf.scene.traverse((o) => {
+          if (!fish && (o as Mesh).isMesh) fish = o as Mesh
+        })
+        if (!fish) return
+
+        const g = (fish as Mesh).geometry
+        g.center()
+        g.rotateY(-Math.PI / 2)
+        g.scale(GLB_SCALE, GLB_SCALE, GLB_SCALE)
+
+        g.setAttribute('aCenter', new InstancedBufferAttribute(instances.center, 3))
+        g.setAttribute('aPhase', new InstancedBufferAttribute(instances.phase, 1))
+        g.setAttribute('aScale', new InstancedBufferAttribute(instances.scale, 1))
+        g.setAttribute('aBand', new InstancedBufferAttribute(instances.band, 1))
+
+        setGeometry(g)
+      },
+      undefined,
+      () => {
+        if (!cancelled) console.warn('[Fish] 鱼模型加载失败')
+      },
+    )
+    return () => {
+      cancelled = true
+    }
+  }, [instances])
 
   const uniforms = useMemo(
     () => ({
@@ -181,6 +194,8 @@ export function FishSchool({ quality }: { quality: QualitySettings }) {
     m.uniforms.uCamY.value = camera.position.y
     m.uniforms.uOpacity.value = Math.min(1, oceanState.underwaterAmount * 1.8)
   })
+
+  if (!geometry) return null
 
   return (
     <instancedMesh ref={mesh} args={[geometry, undefined, count]} frustumCulled={false} renderOrder={3}>
