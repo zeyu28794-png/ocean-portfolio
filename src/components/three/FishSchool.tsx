@@ -55,7 +55,7 @@ const vert = /* glsl */ `
     vec3 local = position * aScale;
 
     // tail wiggle, stronger toward the tail
-    float wig = sin(uTime * 6.5 + aPhase * 6.2831 + local.z * 2.0) * 0.05 * (0.4 - local.z);
+    float wig = sin(uTime * 6.5 + aPhase * 6.2831 + local.z * 2.0) * 0.12 * (0.4 - local.z);
     local.x += wig;
 
     vec3 world = p0 + right * local.x + up * local.y + fwd * local.z;
@@ -124,7 +124,7 @@ function buildInstanceAttributes(count: number) {
     center[i * 3 + 1] = s.y + (rnd() - 0.5) * 3
     center[i * 3 + 2] = s.z + (rnd() - 0.5) * 9
     phase[i] = rnd() * 6.2831
-    scale[i] = 0.8 + rnd() * 1.0
+    scale[i] = 0.533 + rnd() * 0.667
     band[i] = s.y
   }
 
@@ -181,8 +181,8 @@ export function FishSchool({ quality }: { quality: QualitySettings }) {
       uFogColor: ATMOS.uFogColor,
       uFogDensity: ATMOS.uFogDensity,
       uSunDir: ATMOS.uSunDir,
-      uBack: { value: new Color('#1e3641') },
-      uBelly: { value: new Color('#7d9494') },
+      uBack: { value: new Color('#d98a4e') },
+      uBelly: { value: new Color('#f2e2cc') },
       uOpacity: { value: 1 },
     }),
     [],
@@ -192,7 +192,7 @@ export function FishSchool({ quality }: { quality: QualitySettings }) {
     const m = mat.current
     if (!m) return
     m.uniforms.uCamY.value = camera.position.y
-    m.uniforms.uOpacity.value = Math.min(1, oceanState.underwaterAmount * 1.8)
+    m.uniforms.uOpacity.value = Math.min(1, oceanState.underwaterAmount * 2.2)
   })
 
   if (!geometry) return null
