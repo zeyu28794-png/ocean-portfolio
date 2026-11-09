@@ -52,8 +52,8 @@ export function Nav() {
   return (
     <>
       <header className={`nav-shell ${scrolled ? 'is-scrolled' : ''}`}>
-        <a className="brand" href="#home" onClick={(e) => jump(e, 'home')} aria-label="OCEAN, back to top">
-          {site.wordmark}
+        <a className="brand" href="#home" onClick={(e) => jump(e, 'home')} aria-label="周泽宇, back to top">
+          {site.nameZh}
           <i>.</i>
           <small>{site.role}</small>
         </a>

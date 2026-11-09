@@ -25,6 +25,8 @@ export function Projects() {
               <a
                 className="project"
                 href={p.href}
+                target={p.href.startsWith('http') ? '_blank' : undefined}
+                rel={p.href.startsWith('http') ? 'noreferrer noopener' : undefined}
                 onClick={(e) => {
                   if (p.href === '#') e.preventDefault()
                 }}

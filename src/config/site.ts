@@ -33,6 +33,8 @@ export const site = {
   wordmark: 'OCEAN',
   /** 姓名 —— 替换这里即可全站生效 */
   name: 'Zeyu Zhou',
+  /** 中文姓名 */
+  nameZh: '周泽宇',
   /** 首字母（用于头像占位） */
   initials: 'ZZ',
   role: 'Frontend Developer',
