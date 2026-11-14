@@ -33,10 +33,6 @@ export function About() {
           </div>
 
           <div>
-            <Reveal delay={140}>
-              <p className="about-quote">{site.about.quote}</p>
-            </Reveal>
-
             <Reveal delay={220}>
               <div className="about-copy lede">
                 {site.about.paragraphs.map((p) => (
