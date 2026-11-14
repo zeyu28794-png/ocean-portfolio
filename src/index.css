@@ -694,6 +694,7 @@ h3 {
 .about-copy p {
   margin: 0 0 18px;
   max-width: 46ch;
+  color: var(--foam);
 }
 
 .cap-list {
